@@ -3,7 +3,7 @@
 namespace ATM.Individuellt_projekt
 {
     internal class Program
-    {
+    { //Kenny Lindblom SUT22
         static void Main(string[] args)
         {
 
@@ -21,6 +21,8 @@ namespace ATM.Individuellt_projekt
 
         private static string[][] GetUsers(ref string[][] users)
         {
+
+                                  //Användarnamn- Pinkod                  Konto1                       Konto2
             users[0] = new string[] { "Johan", "1234", "SavingsAccount", "15000,0", "PrivateAccount", "4500,50" };
             users[1] = new string[] { "Fredrik", "4321", "SavingsAccount", "1500,0", "PrivateAccount", "30000,50" };
             users[2] = new string[] { "Anna", "1111", "SavingsAccount", "2700,0", "PrivateAccount", "60000,50" };
@@ -50,7 +52,7 @@ namespace ATM.Individuellt_projekt
             int tries = 0;
 
 
-            Welcome();
+            Welcome(); //Kallar på metod som skriver ut Välkommnsmeddelnade.
 
             do
             {
@@ -72,7 +74,7 @@ namespace ATM.Individuellt_projekt
 
                 }
                 tries++;
-                Console.WriteLine("Wrong information.... ");
+                Console.WriteLine("Wrong information.... ");              //Skrivs om fel information skrivs ut som input, stämmer inte överens med array. 
 
 
             } while (tries < 3);
@@ -235,7 +237,7 @@ namespace ATM.Individuellt_projekt
 
 
 
-            MainMenu(ref currentAccountIndex, ref users);
+            MainMenu(ref currentAccountIndex, ref users); //Kallar på metoden mainmenu igen för att komma tillbaka och göra nya val i våran meny 
 
 
 
@@ -250,41 +252,51 @@ namespace ATM.Individuellt_projekt
         {
 
             Console.Clear();
-            Console.WriteLine("Here are your accounts ");
+            Console.WriteLine("Here are your accounts "); //Skriver ut titel för visa konto. Med facit i hand kanske dett borde varit en egen metod eftersom den återkommer många gånger i samma program. 
             Console.WriteLine("_______________________");
 
             for (int i = 2; i < users[currentAccountIndex].Length; i += 2)
             {
-                Console.WriteLine((i / 2) + ". " + users[currentAccountIndex][i] + ": " + users[currentAccountIndex][i + 1] + "kr");
+                Console.WriteLine((i / 2) + ". " + users[currentAccountIndex][i] + ": " + users[currentAccountIndex][i + 1] + "kr"); //Skriver ut konton 
 
             }
 
-            Console.WriteLine("What account do you want to take out money from? ");
-            int withdrawFrom = Int32.Parse(Console.ReadLine()) * 2 + 1;
+            Console.WriteLine("What account do you want to take out money from? "); //frågar frågan vilket konto man vill ta engar ifrån. 
+            int withdrawFrom = int.Parse(Console.ReadLine()) * 2 + 1;
 
 
-            Console.WriteLine("How much do you want to take out? )");
-            double withdrawAmount = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("How much do you want to take out? ");
+            decimal withdrawAmount = Convert.ToDecimal(Console.ReadLine());
 
 
-            if (Convert.ToDouble(users[currentAccountIndex][withdrawFrom]) >= withdrawAmount)
+            if (Convert.ToDecimal(users[currentAccountIndex][withdrawFrom]) >= withdrawAmount) 
             {
 
 
-                double AccountConvert = Convert.ToDouble(users[currentAccountIndex][withdrawFrom]);
+                decimal AccountConvert = Convert.ToDecimal(users[currentAccountIndex][withdrawFrom]);
                 AccountConvert -= withdrawAmount;
                 users[currentAccountIndex][withdrawFrom] = Convert.ToString(AccountConvert);
 
 
                 Console.WriteLine("Money succsefully withdrawn ");
+                Console.WriteLine("Your new balance is \n");
+
+                for (int i = 2; i < users[currentAccountIndex].Length; i += 2)
+                {
+                    Console.WriteLine((i / 2) + ". " + users[currentAccountIndex][i] + ": " + users[currentAccountIndex][i + 1] + "kr");
+                    
+                }
+                Console.WriteLine("Press enter to retrun to mainmenu \n");
+                
             }
-            else
+            else                                                                                  //En else satts om man försöker ta ut mer pengar än vad som finns på kontot
             {
-                Console.WriteLine("Widraw failed, no enough money in account ");
+                Console.WriteLine("Widraw failed, no enough money in account: ");
             }
 
             // Go back to the menu
             Console.ReadKey();
+            Console.Clear();
             MainMenu(ref currentAccountIndex, ref users);
 
 
