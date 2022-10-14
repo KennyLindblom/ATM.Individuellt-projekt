@@ -95,6 +95,50 @@ namespace ATM.Individuellt_projekt
             }
         } //Program start 
 
+        private static void MainMenu(ref int CurrentAccountIndex, ref string[][] users)
+        {
+            Welcome();
+
+            Console.WriteLine("1 - View your account");                //Olika alternativ om vad användaren vill göra 
+            Console.WriteLine("2 - Transfer between accounts");
+            Console.WriteLine("3 - Take out Money");
+            Console.WriteLine("4 - Exit");
+            int userChoiceMenu = int.Parse(Console.ReadLine()); //Sparas i varibel som används i switch 
+            switch (userChoiceMenu)
+            {
+
+                case 1:
+                    CheckUserAccount(ref CurrentAccountIndex, ref users); //Tar oss till kolla konto 
+                    break;
+                case 2:
+                    TransferMoney(ref CurrentAccountIndex, ref users); //Tar oss till föra över pengar 
+                    break;
+                case 3:
+                    TakeOutMoney(ref CurrentAccountIndex, ref users);  //Tar oss till ta ut pengar
+                    break;
+                case 4:
+                    Console.WriteLine("You are beeing logged out..... "); //Stänger programet, tillbka till logga in 
+                    Console.ReadKey();
+
+                    Console.Clear();
+                    ProgramStart(ref CurrentAccountIndex, ref users);
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid choice"); //Om man skriver något annat än 1-4 skrivs felmeddelande ut. 
+                    Console.ReadKey();
+                    Console.Clear();
+                    MainMenu(ref CurrentAccountIndex, ref users);
+                    break;
+
+
+
+            }
+
+
+
+        } //Meny med alla alternativ 
+
 
 
 
