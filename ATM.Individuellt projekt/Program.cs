@@ -62,7 +62,7 @@ namespace ATM.Individuellt_projekt
 
                 for (int i = 0; i < users.Length; i++)
                 {
-                    if (users[i][0] == username && users[i][1] == password) // Om anvädare och pin stämmer överns med index i array 
+                    if (users[i][0] == username && users[i][1] == password) // Om både anvädare och pin stämmer överns med index i array 
                     {
                         currentAccountIndex = i; //Här sparas värdet av den användare som loggar in. 
                         return true;
@@ -104,35 +104,44 @@ namespace ATM.Individuellt_projekt
             Console.WriteLine("3 - Take out Money");
             Console.WriteLine("4 - Exit");
             int userChoiceMenu = int.Parse(Console.ReadLine()); //Sparas i varibel som används i switch 
-           
-            switch (userChoiceMenu)
+            try
             {
+                switch (userChoiceMenu)
+                {
 
-                case 1:
-                    CheckUserAccount(ref CurrentAccountIndex, ref users); //Tar oss till kolla konto 
-                    break;
-                case 2:
-                    TransferMoney(ref CurrentAccountIndex, ref users); //Tar oss till föra över pengar 
-                    break;
-                case 3:
-                    TakeOutMoney(ref CurrentAccountIndex, ref users);  //Tar oss till ta ut pengar
-                    break;
-                case 4:
-                    Console.WriteLine("You are beeing logged out..... "); //Stänger programet, tillbka till logga in 
-                    Console.ReadKey();
+                    case 1:
+                        CheckUserAccount(ref CurrentAccountIndex, ref users); //Tar oss till kolla konto 
+                        break;
+                    case 2:
+                        TransferMoney(ref CurrentAccountIndex, ref users); //Tar oss till föra över pengar 
+                        break;
+                    case 3:
+                        TakeOutMoney(ref CurrentAccountIndex, ref users);  //Tar oss till ta ut pengar
+                        break;
+                    case 4:
+                        Console.WriteLine("You are beeing logged out..... "); //Stänger programet, tillbka till logga in 
+                        Console.ReadKey();
 
-                    Console.Clear();
-                    ProgramStart(ref CurrentAccountIndex, ref users);
-                    break;
+                        Console.Clear();
+                        ProgramStart(ref CurrentAccountIndex, ref users);
+                        break;
 
-                default:
-                    Console.WriteLine("Invalid choice"); //Om man skriver något annat än 1-4 skrivs felmeddelande ut. 
-                    Console.ReadKey();
-                    Console.Clear();
-                    MainMenu(ref CurrentAccountIndex, ref users);
-                    break;
+                    default:
+                        Console.WriteLine("Invalid choice"); //Om man skriver något annat än 1-4 skrivs felmeddelande ut. 
+                        Console.ReadKey();
+                        Console.Clear();
+                        MainMenu(ref CurrentAccountIndex, ref users);
+                        break;
 
 
+
+                }
+
+            }
+
+            catch
+            {
+                
 
             }
 
