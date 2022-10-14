@@ -8,9 +8,9 @@ namespace ATM.Individuellt_projekt
         {
 
             int currentAccountIndex = 0;
-            string[][] users = new string[5][];
+            string[][] users = new string[5][];                         //Jagged array med 5 användare. 
 
-            GetUsers(ref users);
+            GetUsers(ref users);                                        //Kallar på alla användare som är sparade i funktionen Getusers
 
             //Start punkt för programmet som tar oss till mainmenu login är TRUE 
             ProgramStart(ref currentAccountIndex, ref users);
