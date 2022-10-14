@@ -139,6 +139,25 @@ namespace ATM.Individuellt_projekt
 
         } //Meny med alla alternativ 
 
+        private static void CheckUserAccount(ref int currentAccountIndex, ref string[][] users)
+        {
+            Console.Clear();
+            Console.WriteLine("Here are your accounts ");
+            Console.WriteLine("_______________________");
+
+            for (int i = 2; i < users[currentAccountIndex].Length; i += 2) //Går igenom arrray med hjälp av currentAccountIndex för betämma var vi är 
+            {
+                Console.WriteLine(users[currentAccountIndex][i] + ": " + users[currentAccountIndex][i + 1] + " kr"); //Konton skrivs ut 
+
+            }
+            Console.WriteLine("Press enter to return to menu. ");
+            Console.ReadKey();
+            Console.Clear();
+            MainMenu(ref currentAccountIndex, ref users); //Tillbka till mainmenu 
+
+
+        } //Kollar användares konton
+
 
 
 
