@@ -10,6 +10,8 @@ namespace ATM.Individuellt_projekt
             int currentAccountIndex = 0;
             string[][] users = new string[5][];
 
+
+
         }
 
         private static string[][] GetUsers(ref string[][] users)
@@ -25,6 +27,59 @@ namespace ATM.Individuellt_projekt
 
 
         } //Databas av alla användare
+
+        static void Welcome()
+        {
+
+            Console.Title = "Big Money Central Bank";
+            Console.WriteLine("-----Welcome to BMC Bank-----");
+            Console.WriteLine("*****************************");
+
+
+        } //Välkomms meddelande 
+
+        private static bool Login(ref int currentAccountIndex, ref string[][] users)
+        {
+
+            //Deklarera försök börjar på noll, om det går över 3 så går det slut på försök 
+            int tries = 0;
+
+
+            Welcome();
+
+            do
+            {
+                Console.WriteLine("Username: "); //Ber användaren skriva in användarnamn och pin som sedan kollar igenom vår array för att hitta match 
+                string username = Console.ReadLine();
+                Console.WriteLine("PinCode: ");
+                string password = Console.ReadLine();
+
+
+                for (int i = 0; i < users.Length; i++)
+                {
+                    if (users[i][0] == username && users[i][1] == password) // Om anvädare och pin stämmer överns med index i array 
+                    {
+                        currentAccountIndex = i; //Här sparas värdet av den användare som loggar in. 
+                        return true;
+
+                    }
+
+
+                }
+                tries++;
+                Console.WriteLine("Wrong information.... ");
+
+
+            } while (tries < 3);
+            Console.WriteLine("To many tries.... This Application will exit "); // Vi har kommit över 3 försök och hoppar ur lopen, programmet stängs 
+            Environment.Exit(100);
+
+
+
+            return false;
+
+
+        } //Login funktion 
 
 
     }
