@@ -10,6 +10,11 @@ namespace ATM.Individuellt_projekt
             int currentAccountIndex = 0;
             string[][] users = new string[5][];
 
+            GetUsers(ref users);
+
+            //Start punkt för programmet som tar oss till mainmenu login är TRUE 
+            ProgramStart(ref currentAccountIndex, ref users);
+
 
 
         }
@@ -80,6 +85,18 @@ namespace ATM.Individuellt_projekt
 
 
         } //Login funktion 
+
+        private static void ProgramStart(ref int currentAccountIndex, ref string[][] users)
+        {
+            if (Login(ref currentAccountIndex, ref users))
+            {
+                Console.WriteLine("You are logged in" + " " + currentAccountIndex);
+                MainMenu(ref currentAccountIndex, ref users);
+            }
+        } //Program start 
+
+
+
 
 
     }
