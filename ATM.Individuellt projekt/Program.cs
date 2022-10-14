@@ -104,6 +104,7 @@ namespace ATM.Individuellt_projekt
             Console.WriteLine("3 - Take out Money");
             Console.WriteLine("4 - Exit");
             int userChoiceMenu = int.Parse(Console.ReadLine()); //Sparas i varibel som används i switch 
+           
             switch (userChoiceMenu)
             {
 
@@ -168,42 +169,42 @@ namespace ATM.Individuellt_projekt
 
             for (int i = 2; i < users[currentAccountIndex].Length; i += 2)
             {
-                Console.WriteLine((i / 2) + ". " + users[currentAccountIndex][i] + ": " + users[currentAccountIndex][i + 1] + "kr");
+                Console.WriteLine((i / 2) + ". " + users[currentAccountIndex][i] + ": " + users[currentAccountIndex][i + 1] + "kr"); //Skriver ut konton, CurrentAccountIndex bestämmer vart i array vi är. 
             }
 
 
-            Console.WriteLine("What Account do you want to transfer from? ");
+            Console.WriteLine("What Account do you want to transfer from? "); //Frågar vilket konto vi vill flytta ifrån och sparar det i en variabel 
             int transferFrom = int.Parse(Console.ReadLine()) * 2 + 1;
 
 
-            Console.WriteLine("What Account do you want to transfer to ?");
+            Console.WriteLine("What Account do you want to transfer to ?"); //Frågar vilket konto vi vill flytta till och sparar det i en variabel 
             int transferTo = int.Parse(Console.ReadLine()) * 2 + 1;
 
 
-            Console.WriteLine("How much do you want to transfer? ");
+            Console.WriteLine("How much do you want to transfer? "); //Frågar hur stor mängd vi vill flytta och sparar det i en decimal variabel.
             decimal transferAmount = Convert.ToDecimal(Console.ReadLine());
 
 
-            if (Convert.ToDecimal(users[currentAccountIndex][transferFrom]) >= transferAmount)
+            if (Convert.ToDecimal(users[currentAccountIndex][transferFrom]) >= transferAmount) //i och med att array är sparad som string måste vi omvandla den den temporärt för att göra beräkningar. Kollar så att trnsferamount inte är större än vad som finns på kontot.
             {
 
 
-                decimal AccountConvert = Convert.ToDecimal(users[currentAccountIndex][transferFrom]);
-                AccountConvert -= transferAmount;
-                users[currentAccountIndex][transferFrom] = Convert.ToString(AccountConvert);
+                decimal AccountConvert = Convert.ToDecimal(users[currentAccountIndex][transferFrom]); //Omvandlar till decimal 
+                AccountConvert -= transferAmount; //Gör uträkningen
+                users[currentAccountIndex][transferFrom] = Convert.ToString(AccountConvert); //Konverterar tillbaka som en sträng 
 
 
 
-                AccountConvert = Convert.ToDecimal(users[currentAccountIndex][transferTo]);
+                AccountConvert = Convert.ToDecimal(users[currentAccountIndex][transferTo]); 
                 AccountConvert += transferAmount;
                 users[currentAccountIndex][transferTo] = Convert.ToString(AccountConvert);
 
 
-                Console.WriteLine("Transaction went through");
+                Console.WriteLine("Transaction went through"); //skrivs ut om överförning lyckades
 
                 Console.WriteLine("Your new account balance is: ");
 
-                for (int i = 2; i < users[currentAccountIndex].Length; i += 2)  
+                for (int i = 2; i < users[currentAccountIndex].Length; i += 2)   //Skriver ut våra konton igen för att visa nya balansen. 
                 {
                     Console.WriteLine(users[currentAccountIndex][i] + ": " + users[currentAccountIndex][i + 1] + " kr"); 
                 }
@@ -213,7 +214,7 @@ namespace ATM.Individuellt_projekt
                 Console.ReadKey();
                 Console.Clear();
             }
-            else if (Convert.ToDecimal(users[currentAccountIndex][transferFrom]) < transferAmount)
+            else if (Convert.ToDecimal(users[currentAccountIndex][transferFrom]) < transferAmount) //Om det vi vill ta ut är större än det vi har på kontot så misslyckas transaktionen. 
             {
                 Console.WriteLine("You dont have that amount to move.... ");
                 Console.ReadKey();
