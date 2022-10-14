@@ -158,6 +158,75 @@ namespace ATM.Individuellt_projekt
 
         } //Kollar användares konton
 
+        private static void TransferMoney(ref int currentAccountIndex, ref string[][] users)
+        {
+
+            Console.Clear();
+            Console.WriteLine("Here are your accounts");
+            Console.WriteLine("______________________");
+
+
+            for (int i = 2; i < users[currentAccountIndex].Length; i += 2)
+            {
+                Console.WriteLine((i / 2) + ". " + users[currentAccountIndex][i] + ": " + users[currentAccountIndex][i + 1] + "kr");
+            }
+
+
+            Console.WriteLine("What Account do you want to transfer from? ");
+            int transferFrom = int.Parse(Console.ReadLine()) * 2 + 1;
+
+
+            Console.WriteLine("What Account do you want to transfer to ?");
+            int transferTo = int.Parse(Console.ReadLine()) * 2 + 1;
+
+
+            Console.WriteLine("How much do you want to transfer? ");
+            decimal transferAmount = Convert.ToDecimal(Console.ReadLine());
+
+
+            if (Convert.ToDecimal(users[currentAccountIndex][transferFrom]) >= transferAmount)
+            {
+
+
+                decimal AccountConvert = Convert.ToDecimal(users[currentAccountIndex][transferFrom]);
+                AccountConvert -= transferAmount;
+                users[currentAccountIndex][transferFrom] = Convert.ToString(AccountConvert);
+
+
+
+                AccountConvert = Convert.ToDecimal(users[currentAccountIndex][transferTo]);
+                AccountConvert += transferAmount;
+                users[currentAccountIndex][transferTo] = Convert.ToString(AccountConvert);
+
+
+                Console.WriteLine("Transaction went through");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else if (Convert.ToDecimal(users[currentAccountIndex][transferFrom]) < transferAmount)
+            {
+                Console.WriteLine("You dont have that amount to move.... ");
+                Console.ReadKey();
+                Console.Clear();
+
+
+
+            }
+
+
+
+            MainMenu(ref currentAccountIndex, ref users);
+
+
+
+
+
+
+
+
+        } //För över pengar mellan konton 
+
+
 
 
 
