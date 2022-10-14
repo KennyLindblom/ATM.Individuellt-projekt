@@ -200,6 +200,16 @@ namespace ATM.Individuellt_projekt
 
 
                 Console.WriteLine("Transaction went through");
+
+                Console.WriteLine("Your new account balance is: ");
+
+                for (int i = 2; i < users[currentAccountIndex].Length; i += 2)  
+                {
+                    Console.WriteLine(users[currentAccountIndex][i] + ": " + users[currentAccountIndex][i + 1] + " kr"); 
+                }
+
+                Console.WriteLine("\nPress enter to return to menu ");
+
                 Console.ReadKey();
                 Console.Clear();
             }
