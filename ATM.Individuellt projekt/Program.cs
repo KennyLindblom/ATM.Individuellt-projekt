@@ -226,6 +226,55 @@ namespace ATM.Individuellt_projekt
 
         } //För över pengar mellan konton 
 
+        private static void TakeOutMoney(ref int currentAccountIndex, ref string[][] users)
+        {
+
+            Console.Clear();
+            Console.WriteLine("Here are your accounts ");
+            Console.WriteLine("_______________________");
+
+            for (int i = 2; i < users[currentAccountIndex].Length; i += 2)
+            {
+                Console.WriteLine((i / 2) + ". " + users[currentAccountIndex][i] + ": " + users[currentAccountIndex][i + 1] + "kr");
+
+            }
+
+            Console.WriteLine("What account do you want to take out money from? ");
+            int withdrawFrom = Int32.Parse(Console.ReadLine()) * 2 + 1;
+
+
+            Console.WriteLine("How much do you want to take out? )");
+            double withdrawAmount = Convert.ToDouble(Console.ReadLine());
+
+
+            if (Convert.ToDouble(users[currentAccountIndex][withdrawFrom]) >= withdrawAmount)
+            {
+
+
+                double AccountConvert = Convert.ToDouble(users[currentAccountIndex][withdrawFrom]);
+                AccountConvert -= withdrawAmount;
+                users[currentAccountIndex][withdrawFrom] = Convert.ToString(AccountConvert);
+
+
+                Console.WriteLine("Money succsefully withdrawn ");
+            }
+            else
+            {
+                Console.WriteLine("Widraw failed, no enough money in account ");
+            }
+
+            // Go back to the menu
+            Console.ReadKey();
+            MainMenu(ref currentAccountIndex, ref users);
+
+
+
+
+
+
+
+        }  // Tar ut pengar från konton. 
+
 
 
 
